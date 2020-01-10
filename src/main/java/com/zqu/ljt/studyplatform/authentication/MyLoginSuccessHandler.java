@@ -1,7 +1,7 @@
 package com.zqu.ljt.studyplatform.authentication;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.zqu.ljt.study_platform.Untils.JwtUtils;
+import com.zqu.ljt.studyplatform.Untils.JwtUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,9 +1,9 @@
 package com.zqu.ljt.studyplatform.Config;
 
-import com.zqu.ljt.study_platform.Untils.JwtAccessDeniedHandler;
-import com.zqu.ljt.study_platform.authentication.JwtAuthenticationTokenFilter;
-import com.zqu.ljt.study_platform.authentication.MyLoginFailureHandler;
-import com.zqu.ljt.study_platform.authentication.MyLoginSuccessHandler;
+import com.zqu.ljt.studyplatform.Untils.JwtAccessDeniedHandler;
+import com.zqu.ljt.studyplatform.authentication.JwtAuthenticationTokenFilter;
+import com.zqu.ljt.studyplatform.authentication.MyLoginFailureHandler;
+import com.zqu.ljt.studyplatform.authentication.MyLoginSuccessHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
