@@ -6,6 +6,7 @@ import org.mybatis.generator.api.ShellCallback;
 import org.mybatis.generator.config.Configuration;
 import org.mybatis.generator.config.xml.ConfigurationParser;
 import org.mybatis.generator.internal.DefaultShellCallback;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.io.File;
@@ -14,6 +15,8 @@ import java.util.List;
 
 @SpringBootTest
 class StudyplatformApplicationTests {
+    @Autowired
+    AccountService accountService;
 
     @Test
     void contextLoads() throws Exception{
@@ -37,4 +40,8 @@ class StudyplatformApplicationTests {
         System.out.println("MyBatis 逆向工程执行成功，刷新项目查看文件！");
     }
 
+    @Test
+    public void save(){
+        accountService.register(123456,"123456");
+    }
 }
