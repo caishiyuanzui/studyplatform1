@@ -5,7 +5,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-//@MapperScan(value = "com.zqu.ljt.studyplatform.Mapper")
+@MapperScan(value = "com.zqu.ljt.studyplatform.Mapper")
 @MapperScan("com.zqu.ljt.studyplatform.Mapper")
 public class StudyplatformApplication {
 

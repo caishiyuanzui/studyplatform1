@@ -1,11 +1,17 @@
 package com.zqu.ljt.studyplatform.Bean;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
+
 import java.time.LocalDateTime;
 
+@TableName("account")
 public class Account {
     /**
      * 用户ID
      */
+    @TableId (type = IdType.AUTO)
     private Long id;
     /**
      * 类型
@@ -173,5 +179,25 @@ public class Account {
 
     public void setAccessAt(LocalDateTime accessAt) {
         this.accessAt = accessAt;
+    }
+
+    @Override
+    public String toString() {
+        return "Account{" +
+                "id=" + id +
+                ", type='" + type + '\'' +
+                ", wechatId='" + wechatId + '\'' +
+                ", phone='" + phone + '\'' +
+                ", password='" + password + '\'' +
+                ", email='" + email + '\'' +
+                ", name='" + name + '\'' +
+                ", nickname='" + nickname + '\'' +
+                ", gender='" + gender + '\'' +
+                ", avater='" + avater + '\'' +
+                ", address='" + address + '\'' +
+                ", school='" + school + '\'' +
+                ", createAt=" + createAt +
+                ", accessAt=" + accessAt +
+                '}';
     }
 }

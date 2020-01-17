@@ -2,6 +2,9 @@ package com.zqu.ljt.studyplatform.Bean;
 
 import java.time.LocalDateTime;
 
+/**
+ * 投诉
+ */
 public class Complaint {
     public static String STATUS_OPEN = "待处理";
     public static String STATUS_CLOSE = "待处理";
