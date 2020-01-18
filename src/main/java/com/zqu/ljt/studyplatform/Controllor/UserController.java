@@ -9,12 +9,12 @@ import com.zqu.ljt.studyplatform.Mapper.UserMapper;
 import com.zqu.ljt.studyplatform.Service.AccountService;
 import com.zqu.ljt.studyplatform.Service.UserService;
 import com.zqu.ljt.studyplatform.Untils.CodeUtil;
+import com.zqu.ljt.studyplatform.Untils.JwtUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDateTime;
 
 @RestController
@@ -32,15 +32,17 @@ public class UserController {
      * @param password  账号密码
      * @return 用户个人信息
      */
-    @PostMapping("/login")
-    public Message loginByPhoneAndPassword(String phone,String password){
-        QueryWrapper<User> userQueryWrapper = new QueryWrapper<>();
+    @GetMapping("user/login")
+    public Message loginByPhoneAndPassword(@RequestParam String phone, @RequestParam String password, HttpServletRequest request){
+        QueryWrapper<Account> userQueryWrapper = new QueryWrapper<>();
         userQueryWrapper.eq("phone",phone).eq("password",password);
-        User user = userService.getOne(userQueryWrapper);
-        if (user == null){
-            return Message.fail().extend("message","账号或密码错误");
+        System.out.println(phone+password);
+        Account account = accountService.getOne(userQueryWrapper);
+        if (account == null){
+            throw new ServiceException("账号或密码错误");
         }
-        return Message.success().extend("user",user);
+//        JwtUtils.createToken(Account)
+        return Message.success().extend("user",account);
     }
 
     /**
@@ -48,9 +50,12 @@ public class UserController {
      * @param phone 手机号码
      * @return Message
      */
-    public Message sentCode(String phone){
+    @GetMapping("user/sentCode")
+    @ResponseBody
+    public String sentCode(@RequestParam String phone){
         String code = CodeUtil.generate6BitDigital();
-        return Message.success().extend("code",code);
+//        return Message.success().extend("code",code);
+        return code;
     }
 
     /**
@@ -58,7 +63,8 @@ public class UserController {
      * @param password 新密码
      * @return Message
      */
-    public Message updatePasswordByPhone(String password,int id){
+    @GetMapping("user/updatePasswordByPhone")
+    public Message updatePasswordByPhone(@RequestParam String password,int id){
         userMapper.updatePasswordById(password,id);
         return Message.success();
     }
@@ -68,7 +74,8 @@ public class UserController {
      * @param password 新密码
      * @return Message
      */
-    public Message updatePasswordByPassword(String password){
+    @GetMapping("user/updatePasswordByPassword")
+    public Message updatePasswordByPassword(@RequestParam String password){
         return null;
     }
 
@@ -85,7 +92,7 @@ public class UserController {
      * @param id
      * @return
      */
-    @PostMapping("/get")
+    @PostMapping("user/get")
     public User get(int id){
        return userService.getById(id);
     }
@@ -93,9 +100,9 @@ public class UserController {
     /**
      * 注册账号
      * @param user 用户信息
-     * @return
+     * @return 登录用户的信息
      */
-    @PostMapping("/register")
+    @PostMapping("user/register")
     public User registerByPhone(User user){
         if (user == null){
             throw new ServiceException("传入信息不能为空");
@@ -110,5 +117,9 @@ public class UserController {
         user.setId(account.getId());
         userService.save(user);
         return user;
+    }
+
+    public void enable(Long id){
+
     }
 }

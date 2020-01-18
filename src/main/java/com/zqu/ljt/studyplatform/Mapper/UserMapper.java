@@ -6,6 +6,9 @@ import org.apache.ibatis.annotations.Select;
 
 public interface UserMapper extends BaseMapper<User> {
 
-    @Select(value = "update user set password :password where id = :id")
+    @Select(value = "update account set password = #{password} where id = #{id}")
      int updatePasswordById(String password,int id);
+
+    @Select(value = "update user set status='禁用' where id = #{id}")
+    void enable(Long id);
 }

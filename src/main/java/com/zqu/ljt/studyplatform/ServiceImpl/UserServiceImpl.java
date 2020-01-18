@@ -14,9 +14,15 @@ import javax.annotation.Resource;
 @Service
 public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements UserService {
     @Resource
-    UserService userService;
+    UserMapper userMapper;
     @Resource
     AccountServiceImpl accountService;
+
+    @Override
+    public void enable(Long id) {
+        userMapper.enable(id);
+    }
+
 
 //    public Message loginWithPhoneAndPassword(String phone,String password){
 //        Account account = accountService.findByPhoneAndPassword(phone,password);

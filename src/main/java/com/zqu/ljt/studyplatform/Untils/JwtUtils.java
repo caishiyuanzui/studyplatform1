@@ -18,7 +18,7 @@ import java.util.Map;
 
 public class JwtUtils {
     private static final String SECRET = "MySecret_Token";
-    private static final int EXPIRE =5;
+    private static final int EXPIRE =1500;
 
     private static Map<String,Object> attribute;
 
